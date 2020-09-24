@@ -24,14 +24,18 @@
             <th>Action</th>
         </thead>
         <tbody>
-            <%if (data.length <1) %>
-            <% for(let i = 0; i < data.length; i++){ %>
-                <tr>
-                    <td><%= i+1 %> </td>
-                    <td><%= data[i].title %> </td>
-                    <td> <a href="/books/<%= data[i].id %> ">Details</a> || <a href="/order/<%= data[i].id %> ">Order</a> </td>
-                </tr>
-            <% } %> 
+            <%if (data.length > 0) { %>
+                <% for(let i = 0; i < data.length; i++){ %>
+                    <tr>
+                        <td><%= i+1 %> </td>
+                        <td><%= data[i].title %> </td>
+                        <td> <a href="/books/<%= data[i].id %> ">Details</a> || <a href="/order/<%= data[i].id %> ">Order</a> </td>
+                    </tr>
+                <% } %> 
+            <% }else{ %>
+                <h1>Not found!</h1>
+            <% } %>
+           
         </tbody>
     </table>
 </body>
