@@ -8,27 +8,28 @@
 <body>
     <%- include('partials/nav') %> 
     <h1> All Book </h1>
-    <form action="/books">
-        <select name="sort" id="sort">
-            <option value="" selected disabled>--select--</option>
-            <option value="category">category</option>
-            <option value="title">title</option>
-        </select>
-        <input type="search" name="search" id="search">
+    
+    <form action="/book?" method="get">
+        
+        <label for="search">Search Title Book:</label>
+        <input type="search" id="search" name="search" placeholder="Android">
         <button type="submit">Search</button>
+
     </form>
-    <table>
+
+    <br></b><table border="1">
         <thead>
             <th>No. </th>
             <th>Judul</th>
             <th>Action</th>
         </thead>
         <tbody>
+            <%if (data.length <1) %>
             <% for(let i = 0; i < data.length; i++){ %>
                 <tr>
                     <td><%= i+1 %> </td>
                     <td><%= data[i].title %> </td>
-                    <td> <a href="/books/<%= data[i].id %> ">Details</a> || <a href="#">Order</a> </td>
+                    <td> <a href="/books/<%= data[i].id %> ">Details</a> || <a href="/order/<%= data[i].id %> ">Order</a> </td>
                 </tr>
             <% } %> 
         </tbody>

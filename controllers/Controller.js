@@ -1,5 +1,8 @@
-const {Renter, Book} = require('../models')
+const {Renter, Book, BookRenter} = require('../models')
 const bcryptjs = require('bcryptjs')
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
+
 
 class Controller{
 
@@ -172,12 +175,43 @@ class Controller{
     }
 
     static getSortBookHandler(req, res){
-        let category = req.query.category
         let search = req.query.search
-        Book.findAll({
-            where:{
-                category: search
-            }
+
+        Book.findAll({ where: { title: { [Op.like]: `%${search}%` } } })
+        .then(data => {
+            res.render('books', {data})
+        })
+        .catch(err => {
+            res.send(err)
+        })
+    }
+
+    static getOrderBookHandler(req, res){
+        let newOrder = {
+            BookId: req.params.id,
+            RenterId: req.session.renterId
+        }
+
+        BookRenter.create(newOrder)
+        .then(data => {
+            res.redirect('/myorder')
+        })
+        .catch(err => {
+            res.send(err)
+        })
+    }
+
+    static getAllMyOrderBookHandler(req, res){
+        let id = req.session.renterId
+        
+        Renter.findByPk(id, {
+            include: Book
+        })
+        .then(data => {
+            res.render('myorder', {data})
+        })
+        .catch(err => {
+            res.send(err)
         })
     }
 
