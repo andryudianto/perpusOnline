@@ -2,7 +2,7 @@ const {Renter, Book, BookRenter} = require('../models')
 const bcryptjs = require('bcryptjs')
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
-
+const emailGenerator = require('../helpers/send-email')
 
 class Controller{
 
@@ -194,6 +194,10 @@ class Controller{
 
         BookRenter.create(newOrder)
         .then(data => {
+            return Renter.findByPk(data.RenterId)
+        })
+        .then(data => {
+            emailGenerator(data)
             res.redirect('/myorder')
         })
         .catch(err => {

@@ -17,26 +17,26 @@
 
     </form>
 
-    <br></b><table border="1">
-        <thead>
-            <th>No. </th>
-            <th>Judul</th>
-            <th>Action</th>
-        </thead>
-        <tbody>
+    <br></b>
             <%if (data.length > 0) { %>
+                <table border="1">
+                    <thead>
+                        <th>No. </th>
+                        <th>Judul</th>
+                        <th>Action</th>
+                    </thead>
+                    <tbody>
                 <% for(let i = 0; i < data.length; i++){ %>
                     <tr>
                         <td><%= i+1 %> </td>
                         <td><%= data[i].title %> </td>
                         <td> <a href="/books/<%= data[i].id %> ">Details</a> || <a href="/order/<%= data[i].id %> ">Order</a> </td>
                     </tr>
-                <% } %> 
+                <% } %>
+            </tbody>
+        </table>
             <% }else{ %>
                 <h1>Not found!</h1>
             <% } %>
-           
-        </tbody>
-    </table>
 </body>
 </html>
