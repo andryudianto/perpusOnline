@@ -6,6 +6,7 @@
     <title>Profile <%= data.fullName %> </title>
 </head>
 <body>
+    <%- include('partials/nav') %> 
     <h1>Profile <%= data.fullName %> </h1>
     
     <form action="/profile/<%= data.id %> " method="post">
