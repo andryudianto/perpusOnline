@@ -30,7 +30,7 @@
                     <tr>
                         <td><%= i+1 %> </td>
                         <td><%= data[i].title %> </td>
-                        <td> <a href="/books/<%= data[i].id %> ">Details</a> || <a href="/order/<%= data[i].id %> ">Order</a> </td>
+                        <td> <a href="/books/<%= data[i].id %> ">Details</a> || <a href="/order/<%= data[i].id %> " onclick="return confirm('Udah yakin?')" >Order</a> </td>
                     </tr>
                 <% } %>
             </tbody>
